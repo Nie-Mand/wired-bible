@@ -25,7 +25,7 @@ export default function RootLayout({
           <div className="max-w-5xl mx-auto">
             <div className="text-center">
               <Link href="/" className="text-2xl tracking-widest font-bold">
-                The Wired Bible
+                THE WIRED BIBLE
               </Link>
             </div>
             <div className="pt-20">{children}</div>
