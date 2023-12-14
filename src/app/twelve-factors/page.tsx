@@ -5,9 +5,8 @@ export default function Home() {
   return (
     <NextUIProvider>
       <main className="min-h-screen">
-        <h1>hello world</h1>
         <Button color="primary" radius="sm">
-          hello world
+          FUCKK
         </Button>
       </main>
     </NextUIProvider>
