@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import localFont from "next/font/local";
+import Link from "next/link";
+
+const nagoda = localFont({
+  src: "../../public/fonts/Nagoda.otf",
+  display: "auto",
+});
 
 export const metadata: Metadata = {
   title: "Wired Bible",
@@ -12,8 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={nagoda.className}>
+      <body>
+        <main className="min-h-screen py-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center">
+              <Link href="/" className="text-2xl tracking-widest font-bold">
+                The Wired Bible
+              </Link>
+            </div>
+            <div className="pt-20">{children}</div>
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
