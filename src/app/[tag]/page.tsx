@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <NextUIProvider className="dark">
-      <main className="min-h-screen">
+      <main className="min-h-screen px-4">
         {loading ? (
           <div className="w-full flex flex-col gap-2">
             <Skeleton className="h-3 w-3/5 rounded-lg" />
@@ -38,7 +38,7 @@ export default function Home() {
                 <Card className="p-8" radius="sm">
                   {practices.map((practice, idx) => (
                     <div className="py-4" key={idx}>
-                      <h2 className="">{practice.text}</h2>
+                      <p className="font-light">{practice.text}</p>
                       {practice.tags.map((tag, tIdx) => (
                         <Link href={`/${tag}`}>
                           <Chip
