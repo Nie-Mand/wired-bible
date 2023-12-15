@@ -3,6 +3,7 @@ import { NextUIProvider, Divider, Link } from "@nextui-org/react";
 import NextLink from "next/link";
 
 const chapters = ["environment"];
+
 export default function Home() {
   return (
     <NextUIProvider className="dark">
