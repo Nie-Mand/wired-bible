@@ -10,17 +10,31 @@ export function useChapters() {
 }
 
 export function useTagged(tag: string) {
-  return useSWR("/api/tagged", () => {
-    return fetch("/api/?tag=" + tag)
-      .then((res) => res.json())
-      .then((data) => data as Practice[]);
-  });
+  return useSWR(
+    ["/api/tagged", tag],
+    () => {
+      return fetch("/api/?tag=" + tag)
+        .then((res) => res.json())
+        .then((data) => data as Practice[]);
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
 }
 
 export function useChapter(chapter: string) {
-  return useSWR("/api/chapter", () => {
-    return fetch("/api/?chapter=" + chapter)
-      .then((res) => res.json())
-      .then((data) => data as Practice[]);
-  });
+  return useSWR(
+    ["/api/chapter", chapter],
+    () => {
+      return fetch("/api/?chapter=" + chapter)
+        .then((res) => res.json())
+        .then((data) => data as Practice[]);
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
 }
