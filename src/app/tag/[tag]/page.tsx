@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <NextUIProvider className="dark">
-      <main className="min-h-screen px-4">
+      <main className="px-4">
         {practices.isLoading ? (
           <div className="w-full flex flex-col gap-2">
             <Skeleton className="h-3 w-3/5 rounded-lg" />

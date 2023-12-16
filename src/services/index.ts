@@ -43,7 +43,6 @@ export async function tagged(tag: string) {
   let data: Practice[] = [];
   for (const key of keys) {
     const id = key.split(":")[1];
-    console.log(id);
     const chapter = key.split(":")[0];
     const text = await kv.get<string>(`${chapter}:${id}:text`);
     const tagsKeys = await kv.keys(`*:${id}:tags:*`);
@@ -53,8 +52,11 @@ export async function tagged(tag: string) {
       chapter,
       text: text || "",
       tags,
+      id: parseInt(id),
     });
   }
+
+  data.sort((a, b) => a.id! - b.id!);
 
   return data;
 }
