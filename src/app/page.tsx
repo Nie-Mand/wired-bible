@@ -1,23 +1,44 @@
 "use client";
-import { NextUIProvider, Divider, Link } from "@nextui-org/react";
+import { useChapters } from "@/utils/use-services";
+import { NextUIProvider, Divider, Link, Skeleton } from "@nextui-org/react";
 import NextLink from "next/link";
 
-const chapters = ["environment"];
-
 export default function Home() {
+  const chapters = useChapters();
+
+  console.log(chapters.data);
+
   return (
     <NextUIProvider className="dark">
       <p className="text-center capitalize text-sm md:text-base">
         patterns, rules, short-length lessons from my experience or from
-        different paradigms of software development.
+        different books, blogs of software development.
       </p>
       <Divider className="my-4" />
       <div className="flex flex-col space-y-3 px-4">
-        {chapters.map((chapter) => (
-          <NextLink href={`/${chapter}`} className="capitalize">
-            <Link color="secondary">{chapter}</Link>
-          </NextLink>
-        ))}
+        {chapters.isLoading ? (
+          <div className="w-full flex flex-col gap-2">
+            <Skeleton className="h-3 w-3/5 rounded-lg" />
+            <Skeleton className="h-3 w-1/5 rounded-lg" />
+            <Skeleton className="h-3 w-2/5 rounded-lg" />
+            <Skeleton className="h-3 w-1/5 rounded-lg" />
+            <Skeleton className="h-3 w-2/5 rounded-lg" />
+            <Skeleton className="h-3 w-3/5 rounded-lg" />
+          </div>
+        ) : null}
+        {!chapters.isLoading &&
+          chapters.data &&
+          chapters.data.map((chapter) => (
+            <Link
+              as={NextLink}
+              href={`/${chapter}`}
+              color="secondary"
+              className="capitalize"
+              key={chapter}
+            >
+              {chapter}
+            </Link>
+          ))}
       </div>
     </NextUIProvider>
   );

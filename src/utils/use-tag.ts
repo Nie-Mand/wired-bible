@@ -16,3 +16,20 @@ export function useTag() {
 
   return tag;
 }
+
+
+export function useChapterParams() {
+  const params = useParams();
+
+  const chapter = useMemo(() => {
+    if (!params) {
+      return undefined;
+    }
+    if (params["chapter"]) {
+      return params["chapter"];
+    }
+    return undefined;
+  }, [params]);
+
+  return chapter;
+}

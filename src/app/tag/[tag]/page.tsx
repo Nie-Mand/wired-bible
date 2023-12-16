@@ -1,46 +1,38 @@
 "use client";
-import { Practice } from "@/services";
+import { useTagged } from "@/utils/use-services";
 import { useTag } from "@/utils/use-tag";
 import { NextUIProvider, Chip, Skeleton, Card } from "@nextui-org/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const tag = useTag();
-  const [loading, setLoading] = useState(true);
-  const [practices, setPractices] = useState<Practice[]>([]);
-
-  useEffect(() => {
-    fetch("/api?tag=" + tag)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setLoading(false);
-        setPractices(data);
-      });
-  }, []);
+  const practices = useTagged(tag as string);
 
   return (
     <NextUIProvider className="dark">
       <main className="min-h-screen px-4">
-        {loading ? (
+        {practices.isLoading ? (
           <div className="w-full flex flex-col gap-2">
             <Skeleton className="h-3 w-3/5 rounded-lg" />
             <Skeleton className="h-3 w-4/5 rounded-lg" />
           </div>
-        ) : (
+        ) : null}
+
+        {!practices.isLoading && practices.data ? (
           <div>
             <Chip className="capitalize" color="danger" variant="flat">
-              {practices.length === 0 ? "Nil: Nothing related to this" : tag}
+              {practices.data.length === 0
+                ? "Nil: Nothing related to this"
+                : tag}
             </Chip>
             <div className="py-10">
-              {practices.length === 0 ? null : (
+              {practices.data.length === 0 ? null : (
                 <Card className="p-8" radius="sm">
-                  {practices.map((practice, idx) => (
+                  {practices.data.map((practice, idx) => (
                     <div className="py-4" key={idx}>
                       <p className="font-light">{practice.text}</p>
                       {practice.tags.map((tag, tIdx) => (
-                        <Link href={`/${tag}`}>
+                        <Link href={`/tag/${tag}`} key={tIdx}>
                           <Chip
                             key={tIdx}
                             className="capitalize"
@@ -58,7 +50,7 @@ export default function Home() {
               )}
             </div>
           </div>
-        )}
+        ) : null}
       </main>
     </NextUIProvider>
   );
