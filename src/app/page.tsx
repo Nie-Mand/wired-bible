@@ -6,8 +6,6 @@ import NextLink from "next/link";
 export default function Home() {
   const chapters = useChapters();
 
-  console.log(chapters.data);
-
   return (
     <NextUIProvider className="dark">
       <p className="text-center capitalize text-sm md:text-base">

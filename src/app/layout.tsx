@@ -36,7 +36,7 @@ export default function RootLayout({
           <div className="py-20 max-w-5xl mx-auto">
             <div className="text-center">
               <NextLink href="/" className="text-2xl tracking-widest font-bold">
-                THE WIRED BIBLE
+                THE WIREDIN BIBLE
               </NextLink>
             </div>
             <div className="pt-20">{children}</div>
